@@ -21,7 +21,7 @@ public:
 	void deleteListCustom(int index);
 	void deleteListEnd();
 
-	void searchElement(int key);
+	int searchElement(int key);
 
 	void showData();
 

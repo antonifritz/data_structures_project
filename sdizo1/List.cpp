@@ -37,6 +37,18 @@ void List::insertListBeginning(ListElement* newElement)
 
 void List::insertListCustom(ListElement* newElement, int index)
 {
+	if (index == 0)
+	{
+		insertListBeginning(newElement);
+		return;
+	}
+
+	if (index == this->size)
+	{
+		insertListEnd(newElement);
+		return;
+	}
+
 	ListElement* iterator = this->head;
 
 	for (int i = 0; i < index - 1; i++)
@@ -78,6 +90,18 @@ void List::deleteListBeginning()
 
 void List::deleteListCustom(int index)
 {
+	if (index == 0)
+	{
+		deleteListBeginning();
+		return;
+	}
+
+	if (index == this->size - 1)
+	{
+		deleteListEnd();
+		return;
+	}
+
 	ListElement* iterator = this->head;
 
 	for (int i = 0; i < index; i++)
@@ -105,14 +129,20 @@ void List::deleteListEnd()
 	this->size--;
 }
 
-void List::searchElement(int key)
+int List::searchElement(int key)
 {
+	int i = 0;
 	ListElement* iterator = this->head;
 
 	while (iterator->getKey() != key && iterator->getNext() != nullptr)
 	{
 		iterator = iterator->getNext();
+		i++;
 	}
+	if (iterator->getNext() == nullptr && iterator->getKey() != key)
+		return -1;
+	else
+		return i;
 }
 
 void List::showData()

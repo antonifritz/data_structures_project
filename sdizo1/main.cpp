@@ -70,15 +70,23 @@ int main()
 		sum = 0;
 
 		std::cout << "MENU" << endl;
-		std::cout << "Wybierz rodzaj struktury:" << endl;
-		std::cout << "1. Tablica" << endl;
-		std::cout << "2. Lista" << endl;
-		std::cout << "3. Kopiec binarny (maksimum)" << endl;
-		std::cout << "4. Wyswietl glowna tablice" << endl;
+		std::cout << "Wybierz rodzaj testow na strukturach danych" << endl;
+		std::cout << "1. Testuj czasy operacji:" << endl;
+		std::cout << "2. Testuj dzialanie operacji:" << endl;
 
 		std::cin >> number1;
 
-		if (number1 == 1)
+		if(number1 == 1)
+		
+		{
+			std::cout << "Wybierz rodzaj struktury:" << endl;
+			std::cout << "1. Tablica" << endl;
+			std::cout << "2. Lista" << endl;
+			std::cout << "3. Kopiec binarny (maksimum)" << endl;
+
+			std::cin >> number1;
+
+			if (number1 == 1)
 		{
 			std::cout << endl;
 			std::cout << "Wybierz operacje ktora chcesz przeprowadzic na tablicy:" << endl;
@@ -86,7 +94,7 @@ int main()
 			std::cout << "2. Wstaw w dowolne miejsce" << endl;
 			std::cout << "3. Wstaw na koniec" << endl;
 			std::cout << "4. Usun z poczatku" << endl;
-			std::cout << "5. Usum z dowolnego miejsca" << endl;
+			std::cout << "5. Usun z dowolnego miejsca" << endl;
 			std::cout << "6. Usun z konca" << endl;
 			std::cout << "7. Wyszukaj element" << endl;
 
@@ -261,7 +269,7 @@ int main()
 			{
 				std::cout << "Wybrano operacje usun z dowolnego miejsca" << endl;
 				int index;
-				std::cout << "Podaj indeks wstawianego elementu" << endl;
+				std::cout << "Podaj indeks usuwanego elementu" << endl;
 				std::cin >> index;
 				std::cout << "Obliczanie usrednionego czasu operacji..." << endl;
 
@@ -357,7 +365,7 @@ int main()
 					QueryPerformanceFrequency(&frequency);
 					QueryPerformanceCounter(&start);
 
-					array->searchArray(value);						  //pomiar czasu metody
+					int k = array->searchArray(value);						  //pomiar czasu metody
 
 					QueryPerformanceCounter(&end);
 					interval = (double)(end.QuadPart - start.QuadPart) / frequency.QuadPart;
@@ -366,6 +374,10 @@ int main()
 
 					if (i == 0)
 					{
+						if (k != -1)
+							std::cout << "Znaleziono na indeksie: " << k << endl;
+						else
+							std::cout << "Nie znaleziono" << endl;
 						array->showData();							  //jednokrotne wyświetlenie tablicy
 					}
 				}
@@ -376,7 +388,7 @@ int main()
 				double result = sum * 100.0;
 				std::cout << "Czas wyniosl: " << result << " * 10^-4 [s]" << endl;
 			}
-
+			
 			else
 			{
 				std::cout << "Wprowadz prawidlowy numer" << endl;
@@ -384,7 +396,7 @@ int main()
 
 		}
 
-		else if (number1 == 2)
+			else if (number1 == 2)
 		{
 			std::cout << "Wybrano strukture lista" << endl;
 			std::cout << "Rozmiar listy wynosi: " << size << endl;
@@ -670,12 +682,20 @@ int main()
 					QueryPerformanceFrequency(&frequency);
 					QueryPerformanceCounter(&start);
 
-					list->searchElement(input);
+					int k = list->searchElement(input);
 
 					QueryPerformanceCounter(&end);
 					interval = (double)(end.QuadPart - start.QuadPart) / frequency.QuadPart; //pomiar czasu metody
 
 					sum = sum + interval;													 //zwiększenie sumy czasów o dany czas
+
+					if (i == 0)
+					{
+						if (k != -1)
+							std::cout << "znaleziono na indeksie: " << k << endl;
+						else
+							std::cout << "nie znaleziono" << endl;
+					}
 				}
 
 				delete list;																 //usunięcie listy
@@ -685,7 +705,7 @@ int main()
 			}
 		}
 
-		else if (number1 == 3)
+			else if (number1 == 3)
 		{
 			std::cout << "Wybrano strukture kopiec binarny" << endl;
 			std::cout << "Rozmiar kopca wynosi: " << size << endl;
@@ -812,12 +832,20 @@ int main()
 					QueryPerformanceFrequency(&frequency);
 					QueryPerformanceCounter(&start);
 
-					heap->searchHeap(input);													//pomiar czasu metody		
+					int k = heap->searchHeap(input);													//pomiar czasu metody		
 
 					QueryPerformanceCounter(&end);
 					interval = (double)(end.QuadPart - start.QuadPart) / frequency.QuadPart;
 
 					sum = sum + interval;														//zwiększenie sumy czasów o czas danego pomiaru
+
+					if (j == 0)
+					{
+						if (k != -1)
+							std::cout << "Znaleziono na indeksie: " << k << endl;
+						else
+							std::cout << "Nie znalezniono" << endl;
+					}
 				}
 
 				delete heap->getArrayPointerHeap();
@@ -832,17 +860,241 @@ int main()
 			}
 		}
 
-		else if (number1 == 4)
-		{
-			mainArray->showData();																//wyświetlenie tablicy
-		}
-
-		else
+			else
 		{
 			std::cout << "Wprowadź poprawny numer";
 		}
 
-		std::cout << endl;
+			std::cout << endl;
+		}
+
+		else if (number1 == 2)
+		{
+			std::cout << endl << "Wybierz rodzaj struktury:" << endl;
+			std::cout << "1. Tablica" << endl;
+			std::cout << "2. Lista" << endl;
+			std::cout << "3. Kopiec binarny (maksimum)" << endl;
+			
+			cin >> number2;
+
+			if (number2 == 1)
+			{
+				cout << endl << "Tworzenie tablicy..." << endl;
+				Array* array = new Array(size);												//tworzona jest nowa tablica
+
+				for (int j = 0; j < size; j++)
+				{
+					array->setArray(j, mainArray->getArray(j));								//przypisanie wartości z tablicy tworzonej z pliku
+				}
+				array->showData();
+
+				do {
+					cout << endl << "Wybierz operacje ktora chcesz przeprowadzic na tablicy:" << endl;
+					cout << "1. Wstaw na poczatek" << endl;
+					cout << "2. Wstaw w dowolne miejsce" << endl;
+					cout << "3. Wstaw na koniec" << endl;
+					cout << "4. Usun z poczatku" << endl;
+					cout << "5. Usun z dowolnego miejsca" << endl;
+					cout << "6. Usun z konca" << endl;
+					cout << "7. Wyszukaj element" << endl;
+					cout << "8. Wyjdz ze struktury tablica" << endl;
+
+					cin >> number3;
+
+					if (number3 == 1)
+					{
+						int value;
+						cout << endl << "Podaj wartosc wstawianego elementu: " << endl;
+						cin >> value;
+						array->insertArrayBeginning(value);
+						array->showData();
+					}
+					else if (number3 == 2)
+					{
+						int value, index;
+						cout << endl << "Podaj wartosc wstawianego elementu: " << endl;
+						cin >> value;
+						cout << endl << "Podaj indeks wstawianego elementu: " << endl;
+						cin >> index;
+						array->insertArrayCustom(index, value);
+						array->showData();
+					}
+					else if (number3 == 3)
+					{
+						int value;
+						cout << endl << "Podaj wartosc wstawianego elementu: " << endl;
+						cin >> value;
+						array->insertArrayEnd(value);
+						array->showData();
+					}
+					else if (number3 == 4)
+					{
+						array->deleteArrayBeginning();
+						array->showData();
+					}
+					else if (number3 == 5)
+					{
+						int index;
+						cout << endl << "Podaj indeks usuwanego elementu" << endl;
+						cin >> index;
+						array->deleteArrayCustom(index);
+						array->showData();
+					}
+					else if (number3 == 6)
+					{
+						array->deleteArrayEnd();
+						array->showData();
+					}
+					else if (number3 == 7)
+					{
+						int value, index;
+						cout << endl << "Podaj wartosc szukanego elementu" << endl;
+						cin >> value;
+						index = array->searchArray(value);
+						if(index != -1)
+							cout << endl << "Znaleziono element na indeksie: " << index << endl;
+						else
+							cout << endl << "Nie znaleziono elementu" << endl;
+					}
+				} while (number3 != 8);
+			}
+			else if (number2 == 2)
+			{
+				cout << "Tworzenie listy..." << endl;
+				ListElement* head = new ListElement(mainArray->getArray(0));
+				List* list = new List(head);
+
+				for (int i = 1; i < size; i++)
+				{
+					ListElement* newElement = new ListElement(mainArray->getArray(i));
+					list->insertListEnd(newElement);
+				}
+
+				list->showData();
+
+				do {
+					cout << endl << "Wybierz operacje ktora chcesz przeprowadzic na liscie:" << endl;
+					cout << "1. Wstaw na poczatek" << endl;
+					cout << "2. Wstaw w dowolne miejsce" << endl;
+					cout << "3. Wstaw na koniec" << endl;
+					cout << "4. Usun z poczatku" << endl;
+					cout << "5. Usun z dowolnego miejsca" << endl;
+					cout << "6. Usun z konca" << endl;
+					cout << "7. Wyszukaj element" << endl;
+					cout << "8. Wyjdz ze struktury lista" << endl;
+
+					cin >> number3;
+
+					if (number3 == 1)
+					{
+						int value;
+						cout << endl << "Podaj wartosc wstawianego elementu: " << endl;
+						cin >> value;
+						ListElement* newElement = new ListElement(value);
+						list->insertListBeginning(newElement);
+						list->showData();
+					}
+					else if (number3 == 2)
+					{
+						int value, index;
+						cout << endl << "Podaj wartosc wstawianego elementu: " << endl;
+						cin >> value;
+						cout << endl << "Podaj indeks wstawianego elementu: " << endl;
+						cin >> index;
+						ListElement* newElement = new ListElement(value);
+						list->insertListCustom(newElement, index);
+						list->showData();
+					}
+					else if (number3 == 3)
+					{
+						int value;
+						cout << endl << "Podaj wartosc wstawianego elementu: " << endl;
+						cin >> value;
+						ListElement* newElement = new ListElement(value);
+						list->insertListEnd(newElement);
+						list->showData();
+					}
+					else if (number3 == 4)
+					{
+						list->deleteListBeginning();
+						list->showData();
+					}
+					else if (number3 == 5)
+					{
+						int index;
+						cout << endl << "Podaj indeks usuwanego elementu" << endl;
+						cin >> index;
+						list->deleteListCustom(index);
+						list->showData();
+					}
+					else if (number3 == 6)
+					{
+						list->deleteListEnd();
+						list->showData();
+					}
+					else if (number3 == 7)
+					{
+						int value, index;
+						cout << endl << "Podaj wartosc szukanego elementu" << endl;
+						cin >> value;
+						index = list->searchElement(value);
+						if (index != -1)
+							cout << endl << "Znaleziono element na indeksie: " << index << endl;
+						else
+							cout << endl << "Nie znaleziono elementu" << endl;
+					}
+				} while (number3 != 8);
+
+			}
+			else if (number2 == 3)
+			{
+				cout << endl << "Tworzenie kopca..." << endl;
+				Heap* heap = new Heap(mainArray->getArray(0));
+				for (int i = 1; i < size; i++)
+				{
+					heap->insertHeap(mainArray->getArray(i));
+				}
+				heap->showData();
+
+				do {
+					cout << endl << "Wybierz operacje ktora chcesz przeprowadzic na kopcu:" << endl;
+					cout << "1. Wstaw nowy element " << endl;
+					cout << "2. Usun korzen " << endl;
+					cout << "3. Wyszukaj element" << endl;
+					cout << "4. Wyjdz ze struktury kopiec" << endl;
+
+					cin >> number3;
+
+					if (number3 == 1)
+					{
+						int value;
+						cout << endl << "Podaj wartosc wstawianego elementu: " << endl;
+						cin >> value;
+						heap->insertHeap(value);
+						heap->showData();
+					}
+					else if (number3 == 2)
+					{
+						heap->deleteRootHeap();
+						heap->showData();
+					}
+					else if (number3 == 3)
+					{
+						int value, index;
+						cout << endl << "Podaj wartosc szukanego elementu" << endl;
+						cin >> value;
+						index = heap->searchHeap(value);
+						if (index != -1)
+							cout << endl << "Znaleziono element na indeksie: " << index << endl;
+						else
+							cout << endl << "Nie znaleziono elementu" << endl;
+					}
+				} while (number3 != 4);
+
+			}
+
+			}
+
 	}
 
 	return 0;
