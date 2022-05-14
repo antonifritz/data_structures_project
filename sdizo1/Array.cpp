@@ -99,6 +99,12 @@ void Array::insertArrayEnd(int newElement)
 
 void Array::deleteArrayBeginning()			  
 {
+	if (this->size == 0)
+	{
+		std::cout << "Tablica jest pusta!" << std::endl;
+		return;
+	}
+
 	int* oldArray = this->array;
 
 	int* newArray = new int[this->size - 1];  //zaalokowanie tablicy pomniejszonej o 1
@@ -140,6 +146,12 @@ void Array::deleteArrayCustom(int index)
 
 void Array::deleteArrayEnd()
 {
+	if (this->size == 0)
+	{
+		std::cout << "Tablica jest pusta!" << std::endl;
+		return;
+	}
+
 	int* oldArray = this->array;
 
 	int* newArray = new int[this->size - 1];  //zaalokowanie tablicy o rozmiarze o 1 mniejszym

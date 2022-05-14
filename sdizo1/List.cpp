@@ -28,6 +28,13 @@ void List::setSize(int size)
 
 void List::insertListBeginning(ListElement* newElement)
 {
+	if (this->size == 0)
+	{
+		this->head = newElement;
+		this->head->setKey(newElement->getKey());
+		this->size++;
+		return;
+	}
 	newElement->setNext(this->head);
 	this->head->setPrev(newElement);
 	this->head = newElement;
@@ -66,6 +73,13 @@ void List::insertListCustom(ListElement* newElement, int index)
 
 void List::insertListEnd(ListElement* newElement)
 {
+	if (this->size == 0)
+	{
+		this->head = newElement;
+		this->size++;
+		return;
+	}
+
 	ListElement* iterator = this->head;
 
 	for (int i = 0; i < this->size - 1; i++)
@@ -81,6 +95,16 @@ void List::insertListEnd(ListElement* newElement)
 
 void List::deleteListBeginning()
 {
+	if (this->size == 0)
+	{
+		return;
+	}
+	if (this->size == 1)
+	{
+		this->head == nullptr;
+		this->size--;
+		return;
+	}
 	ListElement* iterator = this->head;
 	this->head = this->head->getNext();
 	this->head->setPrev(nullptr);
@@ -117,6 +141,16 @@ void List::deleteListCustom(int index)
 
 void List::deleteListEnd()
 {
+	if (this->size == 0)
+	{
+		return;
+	}
+	if (this->size == 1)
+	{
+		this->head == nullptr;
+		this->size--;
+		return;
+	}
 	ListElement* iterator = this->head;
 
 	for (int i = 0; i < size - 1; i++)
@@ -131,6 +165,11 @@ void List::deleteListEnd()
 
 int List::searchElement(int key)
 {
+	if (this->size == 0)
+	{
+		std::cout <<std::endl<<"Lista pusta";
+		return -1;
+	}
 	int i = 0;
 	ListElement* iterator = this->head;
 
@@ -147,11 +186,16 @@ int List::searchElement(int key)
 
 void List::showData()
 {
+	if (this->size == 0)
+		std::cout << "Lista pusta!" << std::endl;
+
+	else {
 	ListElement* iterator = this->head;
 
 	for (int i = 0; iterator != nullptr; i++)
 	{
 		std::cout << i << ": " << iterator->getKey() << std::endl;
 		iterator = iterator->getNext();
+	}
 	}
 }

@@ -50,6 +50,13 @@ void Heap::insertHeap(int key)								//wstawia nowy element do kopca
 
 void Heap::deleteRootHeap()									//algorytm usuwania korzenia	
 {
+	if (this->size == 0)
+	{
+		std::cout << "Kopiec jest pusty!" << std::endl;
+		return;
+	}
+
+
 	int* newArray = new int[this->size - 1];
 	int* oldArray = this->array;
 
